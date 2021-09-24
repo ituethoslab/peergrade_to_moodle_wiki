@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Configuration file
+config.ini
+
+# Editor temporary files
+*~
