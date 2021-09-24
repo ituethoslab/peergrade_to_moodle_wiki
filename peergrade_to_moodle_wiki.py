@@ -1,5 +1,6 @@
 import logging
 import configparser
+import argparse
 from time import sleep
 from tqdm import tqdm
 
@@ -11,8 +12,13 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     config.read('config.ini')
 
-    assignment = models.PeerGradeAssignment(config['assignment']['zipfile'])
-    learnit = models.LearnIT(config['lms']['endpoint'], config['lms']['token'])
+    argparser = argparse.ArgumentParser()
+    argparser.add_argument('zipfile', help="ZIP file of submissions.")
+    argparser.add_argument('wikiid', help="Wiki ID on Moodle.")
+    args = argparser.parse_args()
+
+    assignment = models.PeerGradeAssignment(args.zipfile)
+    learnit = models.LearnIT(args.wikiid)
 
     for s in tqdm(assignment.submissions):
         logging.info(s)
