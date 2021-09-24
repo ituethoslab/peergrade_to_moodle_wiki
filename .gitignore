@@ -125,6 +125,9 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
+# Flycheck
+flycheck_*
+
 # Pyre type checker
 .pyre/
 
