@@ -38,7 +38,7 @@ class LearnIT:
 
     def list_pages(self, wid):
         """List wiki pages."""
-        logging.debug("Getting pages of wiki id %d" % wid)
+        logging.debug("Getting pages of wiki id %d" % int(wid))
         params = {
             'wikiid': wid
         }
@@ -104,7 +104,7 @@ class Submission:
         self.body = body
         self.author, email_and_file = filename.rsplit('-', 1)
         self.email, _ = email_and_file.split('/', 1)
-        self.title = title or f"📎 Oops this page needs a name {uuid.uuid1()}"
+        self.title = title or f"📎 Oops this page needs a name! 🙀 {uuid.uuid1()}"
         # logging.debug("📄 %s" % raw)
 
     def __repr__(self):
@@ -129,7 +129,7 @@ class SubmissionDocx(Submission):
     def __init__(self, filename, raw):
         doc = Document(BytesIO(raw))
         body = "\n".join(p.text for p in doc.paragraphs)
-        title = self.infer_title()
+        title = self.infer_title(doc)
         super().__init__(raw, filename, body, title=title)
 
     def infer_title(self, doc):
